@@ -12,10 +12,20 @@ const initialToDos = [
 export default function ToDoList() {
   const [toDos, setToDos] = useState(initialToDos);
 
+  const removeToDo = (id) => {
+    setToDos((previousToDos) => {
+      return previousToDos.filter((t) => t.id !== id);
+    });
+  };
+
   return (
     <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
       {toDos.map((toDo) => (
-        <ToDoItem toDo={toDo} key={toDo.id} />
+        <ToDoItem
+          toDo={toDo}
+          key={toDo.id}
+          remove={() => removeToDo(toDo.id)}
+        />
       ))}
     </List>
   );
