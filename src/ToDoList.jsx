@@ -12,6 +12,18 @@ const initialToDos = [
 export default function ToDoList() {
   const [toDos, setToDos] = useState(initialToDos);
 
+  const toggleToDo = (id) => {
+    setToDos((previousToDos) => {
+      return previousToDos.map((toDo) => {
+        if (toDo.id === id) {
+          return { ...toDo, completed: !toDo.completed };
+        } else {
+          return toDo;
+        }
+      });
+    });
+  };
+
   const removeToDo = (id) => {
     setToDos((previousToDos) => {
       return previousToDos.filter((t) => t.id !== id);
@@ -24,6 +36,7 @@ export default function ToDoList() {
         <ToDoItem
           toDo={toDo}
           key={toDo.id}
+          toggle={() => toggleToDo(toDo.id)}
           remove={() => removeToDo(toDo.id)}
         />
       ))}
