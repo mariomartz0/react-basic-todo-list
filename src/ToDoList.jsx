@@ -1,6 +1,7 @@
 import { useState } from "react";
 import List from "@mui/material/List";
 import ToDoItem from "./ToDoItem";
+import ToDoForm from "./ToDoForm";
 
 const initialToDos = [
   { id: 1, text: "Feed the dog.", completed: false },
@@ -24,6 +25,15 @@ export default function ToDoList() {
     });
   };
 
+  const addToDo = (text) => {
+    setToDos((previousToDos) => {
+      return [
+        ...previousToDos,
+        { id: previousToDos.length + 1, text: text, completed: false },
+      ];
+    });
+  };
+
   const removeToDo = (id) => {
     setToDos((previousToDos) => {
       return previousToDos.filter((t) => t.id !== id);
@@ -40,6 +50,7 @@ export default function ToDoList() {
           remove={() => removeToDo(toDo.id)}
         />
       ))}
+      <ToDoForm add={addToDo} />
     </List>
   );
 }
