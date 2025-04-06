@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import List from "@mui/material/List";
 import ToDoItem from "./ToDoItem";
 import ToDoForm from "./ToDoForm";
@@ -10,8 +10,21 @@ const initialToDos = [
   { id: 4, text: "Re-fill water purifier.", completed: false },
 ];
 
+const getInitialData = () => {
+  const data = JSON.parse(localStorage.getItem("toDos"));
+  if (!data) {
+    return initialToDos;
+  } else {
+    return data;
+  }
+};
+
 export default function ToDoList() {
-  const [toDos, setToDos] = useState(initialToDos);
+  const [toDos, setToDos] = useState(getInitialData);
+
+  useEffect(() => {
+    localStorage.setItem("toDos", JSON.stringify(toDos));
+  }, [toDos]);
 
   const toggleToDo = (id) => {
     setToDos((previousToDos) => {
