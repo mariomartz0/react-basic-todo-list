@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import List from "@mui/material/List";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import ToDoItem from "./ToDoItem";
 import ToDoForm from "./ToDoForm";
 
@@ -58,16 +60,29 @@ export default function ToDoList() {
   };
 
   return (
-    <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
-      {toDos.map((toDo) => (
-        <ToDoItem
-          toDo={toDo}
-          key={toDo.id}
-          toggle={() => toggleToDo(toDo.id)}
-          remove={() => removeToDo(toDo.id)}
-        />
-      ))}
-      <ToDoForm add={addToDo} />
-    </List>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+        m: 3,
+      }}
+    >
+      <Typography variant="h2" component="h1" sx={{ flexGrow: 1 }}>
+        ToDos
+      </Typography>
+      <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
+        {toDos.map((toDo) => (
+          <ToDoItem
+            toDo={toDo}
+            key={toDo.id}
+            toggle={() => toggleToDo(toDo.id)}
+            remove={() => removeToDo(toDo.id)}
+          />
+        ))}
+        <ToDoForm add={addToDo} />
+      </List>
+    </Box>
   );
 }
