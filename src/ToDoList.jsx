@@ -4,10 +4,14 @@ import ToDoItem from "./ToDoItem";
 import ToDoForm from "./ToDoForm";
 
 const initialToDos = [
-  { id: 1, text: "Feed the dog.", completed: false },
-  { id: 2, text: "Let the dog out.", completed: false },
-  { id: 3, text: "Water the plants.", completed: true },
-  { id: 4, text: "Re-fill water purifier.", completed: false },
+  { id: crypto.randomUUID(), text: "Feed the dog.", completed: false },
+  { id: crypto.randomUUID(), text: "Let the dog out.", completed: false },
+  { id: crypto.randomUUID(), text: "Water the plants.", completed: true },
+  {
+    id: crypto.randomUUID(),
+    text: "Re-fill water purifier.",
+    completed: false,
+  },
 ];
 
 const getInitialData = () => {
@@ -42,7 +46,7 @@ export default function ToDoList() {
     setToDos((previousToDos) => {
       return [
         ...previousToDos,
-        { id: previousToDos.length + 1, text: text, completed: false },
+        { id: crypto.randomUUID(), text: text, completed: false },
       ];
     });
   };
